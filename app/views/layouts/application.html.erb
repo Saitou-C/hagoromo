@@ -11,20 +11,39 @@
   </head>
 
   <body>
-    <header>
-      <% if user_signed_in? %>
+    <% if user_signed_in? %>
+      <header>
+        <li>ホーム</li>
+        <li>検索</li>
+        <li>新規記事投稿</li>
+        <li>マイページ</li>
         <li>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </li>
-      <% else %>
+      </header>
+    <% elsif admin_signed_in? %>
+      <header>
+        <li>ユーザー一覧</li>
+        <li>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+        </li>
+      </header>
+    <% else %>
+      <header>
+        <li>ホーム</li>
+        <li>検索</li>
+        <li>新規記事投稿</li>
+        <li>マイページ</li>
         <li>
           <%= link_to "新規登録", new_user_registration_path %>
         </li>
         <li>
           <%= link_to "ログイン", new_user_session_path %>
         </li>
-      <% end %>
-    </header>
+      </header>
+    <% end %>
+
+
     <%= yield %>
   </body>
 </html>
