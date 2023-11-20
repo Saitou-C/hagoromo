@@ -17,6 +17,13 @@ Rails.application.routes.draw do
 
   scope module: :user do
     root to: "homes#top"
+    get "users/confirm_withdraw" => "users#confirm_withdraw"
+    patch "users/withdraw" => "users#withdraw"
+    resources :users, only: [:show, :edit, :update]
   end
+
+
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,10 @@
+<h3>ユーザー詳細</h3>
+<%= image_tag @user.get_profile_image(200,200) %><br>
+名前<%= @user.name %><br>
+プロフィール<%= @user.introduction %><br>
+メールアドレス<%= @user.email %><br>
+<br>
+<% if @user == current_user %>
+    <%= link_to "プロフィール編集", edit_user_path %><br>
+    <%= link_to "パスワード変更", edit_user_registration_path %><br>
+<% end %>
