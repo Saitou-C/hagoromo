@@ -1,0 +1,10 @@
+<% @posts.each do |post| %>
+  <div>
+    <%=link_to post_path(post.id) do %>
+      <%= image_tag post.get_image %>
+    <% end %>
+    <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
+    <p>説明：<%= post.caption %></p>
+    <p>ユーザーネーム：<%= post.user.name %></p>
+  </div>
+<% end %>

@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :name, length: {minimum: 2, maximum: 20} #ユーザー名2~20文字まで
   validates :introduction, length: {maximum: 50} #自己紹介最大50文字
 
+  has_many :posts, dependent: :destroy
+
   has_one_attached :profile_image
   def get_profile_image(width, height)
     unless profile_image.attached?
