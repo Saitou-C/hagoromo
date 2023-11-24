@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     get "users/confirm_withdraw" => "users#confirm_withdraw"
     patch "users/withdraw" => "users#withdraw"
     resources :users, only: [:show, :edit, :update]
-    resources :posts, only: [:new, :create, :destroy, :index, :show]
+    resources :posts, only: [:new, :create, :destroy, :index, :show] do
+      resources :post_comments, only: [:create, :destroy] #postsに結びつく親子関係のため
+    end
   end
 
 
