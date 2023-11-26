@@ -1,4 +1,6 @@
-<% @posts.each do |post| %>
+<h3>いいね一覧</h3>
+
+<% @favorite_posts.each do |post| %>
   <div>
     <%=link_to post_path(post.id) do %>
       <%= image_tag post.get_image %>

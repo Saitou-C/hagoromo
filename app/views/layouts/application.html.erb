@@ -34,6 +34,7 @@
         <li>検索</li>
         <li><%= link_to "新規記事投稿", new_post_path %></li>
         <li><%= link_to "マイページ", user_path(current_user.id) %></li>
+        <li><%= link_to "お気に入り一覧",favorites_user_path(current_user.id) %></li>
         <li>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         </li>
