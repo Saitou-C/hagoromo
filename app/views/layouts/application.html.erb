@@ -14,17 +14,8 @@
     <% if admin_signed_in? %>
       <header>
         管理者ログインヘッダー
-        <li>ユーザー一覧</li>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
-        <li>ホーム</li>
-        <li>検索</li>
-        <li>新規記事投稿</li>
-        <li>マイページ</li>
-        <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        </li>
+        <li><%= link_to "ユーザー一覧", admin_path %></li>
+        <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
       </header>
     <% elsif user_signed_in? %>
       <header>

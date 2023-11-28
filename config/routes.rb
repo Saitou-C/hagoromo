@@ -6,7 +6,15 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do#namespaceでurlにadminをつける
-    get "/" => "homes#top"
+    get "/" => "users#index"
+    resources :users, only: [:show, :destroy] do
+      member do
+        get :post_index
+      end
+    end
+    resources :posts, only: [:show, :destroy] do
+      resources :post_comments, only: [:index, :show, :destroy]
+    end
   end
 
   # 顧客用
@@ -17,11 +25,10 @@ Rails.application.routes.draw do
 
   scope module: :user do
     root to: "homes#top"
+    get "confirm_withdraw" => "users#confirm_withdraw"
     resources :users, only: [:show, :edit, :update, :destroy] do
       member do #どのユーザーがいいねしたか判別するのにidが必要のためmemberを使う
         get :favorites
-        get "confirm_withdraw" => "users#confirm_withdraw"
-
       end
     end
 

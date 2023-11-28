@@ -1,0 +1,8 @@
+<h3>ユーザー詳細</h3>
+<%= image_tag @user.get_profile_image(200,200) %><br>
+名前<%= @user.name %><br>
+プロフィール<%= @user.introduction %><br>
+メールアドレス<%= @user.email %><br>
+<%= link_to "ユーザー投稿記事一覧",  post_index_admin_user_path(@user.id) %><br>
+ユーザー投稿コメント<%#= link_to %><br>
+ユーザー情報削除<%#%>

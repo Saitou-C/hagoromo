@@ -1,0 +1,17 @@
+ユーザー一覧<br>
+<table class="admin_customer_index has_border">
+	<thead>
+		<th>ユーザーID</th>
+		<th>ユーザー名</th>
+		<th></th>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+			<tr>
+				<td><%= user.id %></td>
+				<td><%= user.name %></td>
+				<td><%= link_to "詳細", admin_user_path(user), class: "btn btn-primary" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
