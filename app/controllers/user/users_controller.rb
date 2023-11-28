@@ -17,14 +17,16 @@ class User::UsersController < ApplicationController
     end
   end
 
-  def withdraw
-
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
   end
 
   def confirm_withdraw
-
   end
-  
+
   def favorites #いいね一覧
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id) #Favoriteテーブルから＠userのuser_idを取→pluckでpost_idを取ってくる
@@ -36,5 +38,9 @@ class User::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
+  end
+
+  def set_user
+    @user = User.find_by(:id => params[:id])
   end
 end

@@ -17,14 +17,14 @@ Rails.application.routes.draw do
 
   scope module: :user do
     root to: "homes#top"
-    get "users/confirm_withdraw" => "users#confirm_withdraw"
-    patch "users/withdraw" => "users#withdraw"
-    resources :users, only: [:show, :edit, :update] do
-      member do #どのユーザーがいいねしたか判別するのにidが必要のためmember使う
+    resources :users, only: [:show, :edit, :update, :destroy] do
+      member do #どのユーザーがいいねしたか判別するのにidが必要のためmemberを使う
         get :favorites
+        get "confirm_withdraw" => "users#confirm_withdraw"
+
       end
     end
-    
+
     resources :posts, only: [:new, :create, :destroy, :index, :show] do
       resources :post_comments, only: [:create, :destroy] #postsに結びつく親子関係のため
       resource :favorite, only: [:create, :destroy] #resource(単数形)にすると/:idがURLに含まれなくなる
