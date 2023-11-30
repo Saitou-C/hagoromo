@@ -4,5 +4,5 @@
 プロフィール<%= @user.introduction %><br>
 メールアドレス<%= @user.email %><br>
 <%= link_to "ユーザー投稿記事一覧",  post_index_admin_user_path(@user.id) %><br>
-ユーザー投稿コメント<%#= link_to %><br>
+<%= link_to "ユーザー投稿コメント一覧", post_comment_index_admin_user_path(@user.id) %><br>
 ユーザー情報削除<%#%>

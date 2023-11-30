@@ -4,7 +4,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def post_index
+    @user = User.find(params[:id])
     @posts = Post.where(user_id:params[:id])
+  end
+
+  def post_comment_index
+    @user = User.find(params[:id])
+    @post_comments = PostComment.where(user_id:params[:id])
   end
 
   def show

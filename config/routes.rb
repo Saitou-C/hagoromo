@@ -10,10 +10,11 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :destroy] do
       member do
         get :post_index
+        get :post_comment_index
       end
     end
-    resources :posts, only: [:show, :destroy] do
-      resources :post_comments, only: [:index, :show, :destroy]
+    resources :posts, only: [:destroy] do
+      resources :post_comments, only: [:destroy]
     end
   end
 

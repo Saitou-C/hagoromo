@@ -2,7 +2,7 @@
 
 class User::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :reject_inactive_user, only: [:create]
+  
 
   def after_sign_in_path_for(resource)
     posts_path
@@ -30,15 +30,6 @@ class User::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-  #アクティブであるかを判断するメソッド(退会フラグ)
-  def reject_inactive_user
-    @user = User.find_by(email: params[:user][:email])#入力されたemailからアカウントを1件取得
-    if @user
-      if @user.valid_password?(params[:user][:password]) && !@user.is_active#取得したアカウントのパスワードと入力されたパスワードが一致しているか判断&&退会していない
-        flash[:alert] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
-        redirect_to new_user_session_path
-      end
-    end
-  end
+
 
 end

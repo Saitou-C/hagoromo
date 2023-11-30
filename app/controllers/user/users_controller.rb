@@ -31,7 +31,7 @@ class User::UsersController < ApplicationController
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id) #Favoriteテーブルから＠userのuser_idを取→pluckでpost_idを取ってくる
     @favorite_posts = Post.find(favorites)
-    @post = Post.find(params[:id])
+    
   end
 
   private

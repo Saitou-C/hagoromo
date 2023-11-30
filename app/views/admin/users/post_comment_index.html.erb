@@ -1,0 +1,34 @@
+<h1>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <%= @user.name %>の投稿コメント一覧
+</h1>
+<table>
+  <thead>
+    <th>コメント先記事</th>
+    <th>コメント</th>
+    <th>投稿日時</th>
+  </thead>
+  <tbody>
+    <% @post_comments.each do |post_comment| %>
+      <tr>
+        <td>
+          <%= link_to post_path(post_comment.post.id) do %>
+            <%= image_tag post_comment.post.get_image(100,100) %>
+          <% end %>
+        </td>
+        <td><%= post_comment.comment %></td>
+        <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+        <td><%= link_to "削除する",  admin_post_post_comment_path(post_comment), method: :delete, "data-confirm" => "削除します。本当によろしいですか？", class: "btn btn-danger" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+  <div>
+    <% if @user.post_comments.any? %>
+    <% else %>
+      まだコメントは投稿されていません。
+    <% end %>
+  </div>
+    
+<%= link_to "戻る", admin_user_path(@user), class: "btn btn-primary" %>

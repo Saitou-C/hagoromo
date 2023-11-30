@@ -1,5 +1,5 @@
 <div>
-  <%= image_tag @post.get_image %>
+  <%= image_tag @post.get_image(600,600) %>
   <p>説明：<%= @post.caption %></p>
   <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
   <p>ユーザーネーム：<%= @post.user.name %></p>
@@ -8,27 +8,35 @@
     <%= link_to "削除", post_path(@post), method: :delete %>
   <% end %>
 
-  <% if @post.favorited_by?(current_user) %>
-    <p>
-      <%= link_to post_favorite_path(@post), method: :delete do %>
-        ♥<%= @post.favorites.count %> いいね
+  <% if user_signed_in? %>
+
+      <% if @post.favorited_by?(current_user) %><!--もしログインしているユーザーがいいねしていたら-->
+        <p>
+          <%= link_to post_favorite_path(@post), method: :delete do %>
+            ♥<%= @post.favorites.count %> いいね
+          <% end %>
+        </p>
+        <% else %>
+        <p>
+          <%= link_to post_favorite_path(@post), method: :post do %> <!--もしいいねしていなかつたら-->
+            ♡<%= @post.favorites.count %> いいね
+          <% end %>
+        </p>
       <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_favorite_path(@post), method: :post do %>
-        ♡<%= @post.favorites.count %> いいね
-      <% end %>
-    </p>
+
+    <% else %><!--もしユーザーがログインしていなかったら-->
+      ♥<%= @post.favorites.count %>いいね<!--いいね数だけ表示-->
   <% end %>
 </div>
 
 <div>
   <p>コメント件数：<%= @post.post_comments.count %></p>
   <div>
-    <%= form_with model: [@post, @post_comment] do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
+    <% if user_signed_in? %>
+      <%= form_with model: [@post, @post_comment] do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+        <%= f.submit "送信する" %>
+      <% end %>
     <% end %>
   </div>
   <% @post.post_comments.each do |post_comment| %>
