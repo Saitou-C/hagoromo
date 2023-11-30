@@ -5,4 +5,4 @@
 メールアドレス<%= @user.email %><br>
 <%= link_to "ユーザー投稿記事一覧",  post_index_admin_user_path(@user.id) %><br>
 <%= link_to "ユーザー投稿コメント一覧", post_comment_index_admin_user_path(@user.id) %><br>
-ユーザー情報削除<%#%>
+ユーザー情報削除<%= link_to "削除", admin_user_path(@user), method: :delete, "data-confirm" => "削除します。本当によろしいですか？", class: "btn btn-danger"  %>
