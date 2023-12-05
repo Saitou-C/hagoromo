@@ -3,7 +3,7 @@
 <% @favorite_posts.each do |post| %>
   <div>
     <%=link_to post_path(post.id) do %>
-      <%= image_tag post.get_image %>
+      <%= image_tag post.get_image(300,300) %>
     <% end %>
     <p>♥<%= post.favorites.count %> いいね</p>
     <p>投稿ユーザー画像：<%= image_tag post.user.get_profile_image(100,100) %></p>
