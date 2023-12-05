@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <h1>Hagoromo</h1>
+    <div class="container">
+      <div class="row justify-content-start mb-2">
+        <div class="mr-3"><%= render 'user/searches/form' %></div>
+        <div class="mr-3"><%= render "user/searches/tag_form" %></div>
+      </div>
+    </div>
     <% if admin_signed_in? %>
       <header>
         管理者ログインヘッダー

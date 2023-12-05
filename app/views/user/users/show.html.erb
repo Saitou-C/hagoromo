@@ -2,9 +2,20 @@
 <%= image_tag @user.get_profile_image(200,200) %><br>
 名前<%= @user.name %><br>
 プロフィール<%= @user.introduction %><br>
-メールアドレス<%= @user.email %><br>
 <br>
 <% if @user == current_user %>
+    メールアドレス<%= @user.email %><br>
     <%= link_to "プロフィール編集", edit_user_path %><br>
-    <%= link_to "パスワード変更", edit_user_registration_path %><br>
+    <%= link_to "メールアドレス・パスワード変更", edit_user_registration_path %><br>
+<% end %>
+
+<h4>投稿記事一覧</h4>
+<% @posts.each do |post| %>
+  <div>
+    <%=link_to post_path(post.id) do %>
+      <%= image_tag post.get_image(300,300) %>
+    <% end %>
+    <p>♥<%= post.favorites.count %> いいね</p>
+    <p>説明：<%= post.caption %></p>
+  </div>
 <% end %>

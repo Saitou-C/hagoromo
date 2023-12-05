@@ -6,8 +6,13 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
+    tag_list = params[:post][:tagname].split(',') #params[:post][:tagname]からコンマで分割してtag_listに代入
+    if @post.save
+      @post.save_tags(tag_list)#postモデルにsave_tagsを定義
+      redirect_to posts_path, notice:'投稿が完了しました'
+    else
+      render :new
+    end
   end
 
   def destroy

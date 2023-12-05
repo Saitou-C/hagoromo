@@ -4,5 +4,9 @@
   <%= f.file_field :image, accept: "image/*" %>
   <h4>説明</h4>
   <%= f.text_area :caption %>
+  <h4>タグ(,で区切ると複数タグ登録できます)</h4>
+  <div class="form-group">
+    <%= f.text_field :tagname %>
+  </div>
   <%= f.submit '投稿' %>
 <% end %>

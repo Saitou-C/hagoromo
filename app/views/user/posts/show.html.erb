@@ -3,6 +3,9 @@
   <p>説明：<%= @post.caption %></p>
   <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
   <p>ユーザーネーム：<%= @post.user.name %></p>
+  <% @post.tags.each do |tag| %>
+    <li style="list-style: none;"><%= link_to tag.tagname, search_path(content: tag.tagname, model:"tag", method: "perfect") %></li>
+  <% end %>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
   <% if @post.user == current_user %>
     <%= link_to "削除", post_path(@post), method: :delete %>
