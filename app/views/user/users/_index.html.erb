@@ -1,4 +1,4 @@
-ユーザー検索結果一覧
+ユーザー検索結果一覧</h3>
 <table class='table'>
   <thead>
     <tr>
@@ -8,13 +8,17 @@
     </tr>
   </thead>
   <tbody>
-    <% users.each do |user| %>
-      <tr>
-        <td><%= image_tag user.get_profile_image(50,50) %></td>
-        <td><%= user.name %></td>
-        <td><%#= render "relationships/btn", user: user %><!--フォロー関係--></td>
-        <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
-      </tr>
+    <% if users.any? %>
+      <% users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_profile_image(50,50) %></td>
+          <td><%= user.name %></td>
+          <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td>検索結果が見つかりませんでした。</td>
     <% end %>
+
   </tbody>
 </table>

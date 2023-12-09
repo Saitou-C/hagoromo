@@ -22,7 +22,7 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
-  def save_tags(savepost_tags)
+  def save_tags(savepost_tags) #タグ機能
     current_tags = self.tags.pluck(:tagname) unless self.tags.nil? #タグが存在していればタグの名前を配列として全て取得。存在していなかったらなにもしない
     old_tags = current_tags - savepost_tags #今postが持っているタグから保存されたタグを除いて(-引く)old_tagsとする。古いタグ(old_tags)は消す
     new_tags = savepost_tags - current_tags #今回保存されたもの(savepost_tag)と現在存在するタグ(current_tags)を除いたタグをnew_tagとする。新しいタグ(new-tags)は保存
@@ -41,14 +41,10 @@ class Post < ApplicationRecord
     end
   end
 
-  def self.search_for(content, method)
-    if method == 'perfect'
+  def self.search_for(content, method) #検索(Postのcaption)
+    if method == 'perfect' #完全一致
       Post.where(caption: content)
-    elsif method == 'forward'
-      Post.where('caption LIKE ?', content+'%')
-    elsif method == 'backward'
-      Post.where('caption LIKE ?', '%'+content)
-    else
+    else #部分一致
       Post.where('caption LIKE ?', '%'+content+'%')
     end
   end

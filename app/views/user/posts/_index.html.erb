@@ -9,22 +9,26 @@
     </tr>
   </thead>
   <tbody>
-    <% posts.each do |post| %>
-      <tr>
-        <td>
-          <%= image_tag post.user.get_profile_image(50,50) %>
-        </td>
-        <td>
-          <%= link_to post, class: "post_#{post.id}" do %>
-            <%= image_tag post.get_image(100,100) %>
-          <% end %>
-        </td>
-        <td>
-          <% post.tags.each do |tag| %> <!--タグいらないかも-->
-            <li style="list-style: none;"><%= link_to tag.tagname, search_path(content: tag.tagname, model:"tag", method: "perfect") %></li>
-          <% end %>
-        </td>
-      </tr>
+    <% if posts.any? %>
+      <% posts.each do |post| %>
+        <tr>
+          <td>
+            <%= image_tag post.user.get_profile_image(50,50) %>
+          </td>
+          <td>
+            <%= link_to post, class: "post_#{post.id}" do %>
+              <%= image_tag post.get_image(100,100) %>
+            <% end %>
+          </td>
+          <td>
+            <% post.tags.each do |tag| %> <!--タグいらないかも-->
+              <li style="list-style: none;"><%= link_to tag.tagname, search_path(content: tag.tagname, model:"tag", method: "perfect") %></li>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td>検索結果が見つかりませんでした。</td>
     <% end %>
   </tbody>
 </table>
