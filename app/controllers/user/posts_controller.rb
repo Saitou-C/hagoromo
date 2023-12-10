@@ -9,7 +9,7 @@ class User::PostsController < ApplicationController
     tag_list = params[:post][:tagname].split(/[[:blank:]]+/)
     #params[:post][:tagname]からスペースで分割してtag_listに代入
     #連続した空白にも対応するので(/[[:blank:]]+/)の最後の"+"が重要
-    
+
     if @post.save
       @post.save_tags(tag_list)#postモデルにsave_tagsを定義
       redirect_to posts_path, notice:'投稿が完了しました'
@@ -25,7 +25,7 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(12)
   end
 
   def show

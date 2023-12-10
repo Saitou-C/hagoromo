@@ -15,8 +15,10 @@
     <%=link_to post_path(post.id) do %>
       <%= image_tag post.get_image(300,300) %>
     <% end %>
-    <p>♥<%= post.favorites.count %> いいね 
+    <p>♥<%= post.favorites.count %> いいね
     コメント数<%= post.post_comments.count %></p>
     <p>説明：<%= post.caption %></p>
   </div>
 <% end %>
+
+<%= paginate @posts %>
