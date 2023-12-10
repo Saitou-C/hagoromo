@@ -1,7 +1,7 @@
 
   <%= form_with url: search_path, method: :get, local: true do |f| %>
     <%= f.text_field :content %> <!--検索内容を:contentとしてsearchコントローラーに送る-->
-    <%= f.select :model, options_for_select({ "Post" => "post", "Tag" => "tag","User" => "user" }) %> <!--選択したモデルを:modelとしてコントローラーに送る-->
+    <%= f.select :model, options_for_select({ "投稿" => "post", "タグ" => "tag","ユーザー" => "user" }) %> <!--選択したモデルを:modelとしてコントローラーに送る-->
     <%= f.select :method, options_for_select({ "部分一致" => "partial", "完全一致" => "perfect" }) %>
     <%= f.submit '検索' %>
   <% end %>
