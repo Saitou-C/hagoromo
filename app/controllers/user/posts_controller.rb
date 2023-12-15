@@ -12,7 +12,7 @@ class User::PostsController < ApplicationController
 
     if @post.save
       @post.save_tags(tag_list)#postモデルにsave_tagsを定義
-      redirect_to posts_path, notice:'投稿が完了しました'
+      redirect_to root_path, notice:'投稿が完了しました'
     else
       render :new
     end

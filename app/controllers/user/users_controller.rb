@@ -1,12 +1,12 @@
 class User::UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(12)
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts..page(params[:page]).per(12)
+    @posts = @user.posts.page(params[:page]).per(12)
   end
 
   def edit
@@ -36,6 +36,7 @@ class User::UsersController < ApplicationController
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id) #Favoriteテーブルから＠userのuser_idを取→pluckでpost_idを取ってくる
     @favorite_posts = Post.find(favorites)
+    @favorite_posts = Kaminari.paginate_array(@favorite_posts).page(params[:page]).per(12) #findメソッドを使って起きるエラー回避
 
   end
 
