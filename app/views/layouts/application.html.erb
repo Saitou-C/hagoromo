@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -14,30 +15,36 @@
     <header class="sticky-top">
       <nav class="navbar" style=" background-color:#e3f2fd;">
 
-        <h1 class="navbar-brand">Hagoromo</h1>
+        <div class="navbar-brand">
+          <h1>Hagoromo</h1>
+        </div>
 
         <div class="container"><!--検索バー-->
           <div class="row form-inline mb-2">
             <div class="mr-3"><%= render 'user/searches/form' %></div>
           </div>
 
-          <% if admin_signed_in? %><!--管理者ログインヘッダー-->
-            <li class="list-unstyled"><%= link_to "ユーザー一覧", admin_path %></li>
-            <li class="list-unstyled"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+          
+            <% if admin_signed_in? %><!--管理者ログインヘッダー-->
+              <li class="list-unstyled"><%= link_to "ユーザー一覧", admin_path %></li>
+              <li class="list-unstyled"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
 
-          <% elsif user_signed_in? %><!--ユーザーログインヘッダー-->
-            <li class="list-unstyled"><%= link_to "ホーム", root_path %></li>
-            <li class="list-unstyled"><%= link_to "新規記事投稿", new_post_path %></li>
-            <li class="list-unstyled"><%= link_to "マイページ", user_path(current_user.id) %></li>
-            <li class="list-unstyled"><%= link_to "お気に入り一覧",favorites_user_path(current_user.id) %></li>
-            <li class="list-unstyled"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+            <% elsif user_signed_in? %><!--ユーザーログインヘッダー-->
+              <li class="list-unstyled"><%= link_to "ホーム", root_path %></li>
+              <li class="list-unstyled"><%= link_to "新規記事投稿", new_post_path %></li>
+              <li class="list-unstyled"><%= link_to "マイページ", user_path(current_user.id) %></li>
+              <li class="list-unstyled"><%= link_to "お気に入り一覧",favorites_user_path(current_user.id) %></li>
+              <li class="list-unstyled"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 
-          <% else %>
-            <li class="list-unstyled"><%= link_to "ホーム", root_path %></li>
-            <li class="list-unstyled"><%= link_to "新規登録", new_user_registration_path %></li>
-            <li class="list-unstyled"><%= link_to "ログイン", new_user_session_path %></li>
-          <% end %>
+            <% else %>
+              <li class="list-unstyled"><%= link_to "ホーム", root_path %></li>
+              <li class="list-unstyled"><%= link_to "新規登録", new_user_registration_path %></li>
+              <li class="list-unstyled"><%= link_to "ログイン", new_user_session_path %></li>
+            <% end %>
+          
+
         </div>
+
       </nav>
     </header>
 

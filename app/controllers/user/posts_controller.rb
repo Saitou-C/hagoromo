@@ -30,6 +30,7 @@ class User::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user_id
     @post_comment = PostComment.new #コメント機能
   end
 

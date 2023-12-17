@@ -11,6 +11,11 @@ module Hagoromo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      %Q(#{html_tag}).html_safe
+    end
+    #バリデーション時にfield_with_errorsを作ってレイアウト崩れるのを防ぐ
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
