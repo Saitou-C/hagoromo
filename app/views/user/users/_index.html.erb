@@ -1,24 +1,28 @@
-ユーザー検索結果一覧</h3>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>image</th>
-      <th>name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if users.any? %>
-      <% users.each do |user| %>
-        <tr>
-          <td><%= image_tag user.get_profile_image(50,50) %></td>
-          <td><%= user.name %></td>
-          <td><%= link_to 'Show', user, class: "user_#{user.id}" %></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <td>検索結果が見つかりませんでした。</td>
-    <% end %>
+<div class="text-center">ユーザー検索結果一覧</div>
+<div class="card-list-container px-5">
 
-  </tbody>
-</table>
+  <% if users.any? %>
+  <div class="card mx-auto mt-4 w-50 center-block">
+    <div class="card-body">
+    <% users.each do |user| %>
+      <%= link_to user, class: "user_#{user.id}" do %>
+        <%= image_tag user.get_profile_image(80,80), class: "rounded-circle" %>
+      <% end %>
+
+      <%= user.name %>
+      <%= user.introduction %>
+
+    <% end %>
+    </div>
+  </div>
+
+  <% else %>
+      検索結果が見つかりませんでした。
+  <% end %>
+
+  <div class="pagination justify-content-center">
+    <%= paginate @records %>
+  </div>
+
+</div>
+
