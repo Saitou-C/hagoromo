@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/271b45693d.js" crossorigin="anonymous"></script> <!--font awesome-->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -16,39 +17,40 @@
       <nav class="navbar" style=" background-color:#e3f2fd;">
 
         <div class="navbar-brand">
-          <h1>Hagoromo</h1>
+          <h2>Hagoromo</h2>
         </div>
 
-        <div class="container"><!--検索バー-->
-          <div class="row form-inline mb-2">
+        <div class="container">
+          <div class="row form-inline mb-2"><!--検索バー-->
             <div class="mr-3"><%= render 'user/searches/form' %></div>
           </div>
 
-          
+
+          <ul class ="nav">
             <% if admin_signed_in? %><!--管理者ログインヘッダー-->
-              <li class="list-unstyled"><%= link_to "ユーザー一覧", admin_path %></li>
-              <li class="list-unstyled"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+              <li class="nav-item mr-3"><%= link_to "ユーザー一覧", admin_path %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
 
             <% elsif user_signed_in? %><!--ユーザーログインヘッダー-->
-              <li class="list-unstyled"><%= link_to "ホーム", root_path %></li>
-              <li class="list-unstyled"><%= link_to "新規記事投稿", new_post_path %></li>
-              <li class="list-unstyled"><%= link_to "マイページ", user_path(current_user.id) %></li>
-              <li class="list-unstyled"><%= link_to "お気に入り一覧",favorites_user_path(current_user.id) %></li>
-              <li class="list-unstyled"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li class="nav-item mr-3"><%= link_to "ホーム", root_path %></li>
+              <li class="nav-item mr-3"><%= link_to "新規記事投稿", new_post_path %></li>
+              <li class="nav-item mr-3"><%= link_to "マイページ", user_path(current_user.id) %></li>
+              <li class="nav-item mr-3"><%= link_to "お気に入り一覧",favorites_user_path(current_user.id) %></li>
+              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 
             <% else %>
-              <li class="list-unstyled"><%= link_to "ホーム", root_path %></li>
-              <li class="list-unstyled"><%= link_to "新規登録", new_user_registration_path %></li>
-              <li class="list-unstyled"><%= link_to "ログイン", new_user_session_path %></li>
+              <li class="nav-item mr-3"><%= link_to "ホーム", root_path %></li>
+              <li class="nav-item mr-3"><%= link_to "新規登録", new_user_registration_path %></li>
+              <li class="nav-item mr-3"><%= link_to "ログイン", new_user_session_path %></li>
             <% end %>
-          
+          </ul>
 
         </div>
 
       </nav>
     </header>
 
-    <main class="mb-auto">
+    <main class="mx-3">
      <%# deivseのフラッシュメッセージを表示 %>
         <!--<p class="notice"><%#= notice %></p>-->
         <!--<p class="alert"><%#= alert %></p>-->

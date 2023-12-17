@@ -2,30 +2,35 @@
 <h3>マイページ</h3>
 <% end %>
 
-<%= image_tag @user.get_profile_image(200,200), class: "rounded-circle" %>
 <div>
-  <%= @user.name %><br>
-  <%= @user.introduction %>
-<% if @user == current_user %>
-    メールアドレス<%= @user.email %><br>
-    <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-info" %>
-    <%= link_to "メールアドレス・パスワード変更", edit_user_registration_path, class: "btn btn-info" %><br>
-<% end %>
+  <%= image_tag @user.get_profile_image(200,200), class: "rounded-circle" %>
+    <%= @user.name %>
+    <%= @user.introduction %><br>
+
+  <% if @user == current_user %>
+      メールアドレス<%= @user.email %><br>
+      <%= link_to "プロフィール編集", edit_user_path, class: "btn btn-info" %>
+      <%= link_to "メールアドレス・パスワード変更", edit_user_registration_path, class: "btn btn-info" %><br>
+  <% end %>
+
 </div>
 
 <div>
   <h4>投稿記事一覧</h4>
-  <% @posts.each do |post| %>
-    <div>
-      <%=link_to post_path(post.id) do %>
-        <%= image_tag post.get_image(300,300) %>
-      <% end %>
-      <p>♥<%= post.favorites.count %> いいね
-      コメント数<%= post.post_comments.count %></p>
-      <p>説明：<%= post.caption %></p>
-    </div>
-  <% end %>
-  
+  <div class="d-flex flex-wrap justify-content-start">
+    <% @posts.each do |post| %>
+      <div class="card mx-auto mt-4">
+        <%=link_to post_path(post.id) do %>
+          <%= image_tag post.get_image(500,500), class: "card-img-top", style: "width: 300px; height: 300px; object-fit:cover;" %>
+        <% end %>
+        <div class="card-body">
+          ♥<%= post.favorites.count %>
+          コメント数<%= post.post_comments.count %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <div class="pagination justify-content-center">
     <%= paginate @posts %>
   </div>

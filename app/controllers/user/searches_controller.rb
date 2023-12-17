@@ -11,5 +11,6 @@ class User::SearchesController < ApplicationController
 		elsif @model == 'tag'
 			@records = Tag.search_posts_for(@content, @method)
 		end
+		@records = Kaminari.paginate_array(@records).page(params[:page]).per(12)
 	end
 end
