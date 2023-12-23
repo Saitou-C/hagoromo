@@ -1,17 +1,28 @@
-ユーザー一覧<br>
-<table class="admin_customer_index has_border">
-	<thead>
-		<th>ユーザーID</th>
-		<th>ユーザー名</th>
-		<th></th>
-	</thead>
-	<tbody>
-		<% @users.each do |user| %>
-			<tr>
-				<td><%= user.id %></td>
-				<td><%= user.name %></td>
-				<td><%= link_to "詳細", admin_user_path(user), class: "btn btn-primary" %></td>
+<div class="m-5" style="max-width:900px;">
+
+	<h3>ユーザー一覧</h3>
+	<table class="table">
+		<thead class="bg-secondary">
+			<tr class="text-light">
+				<th>ユーザーID</th>
+				<th>ユーザー名</th>
+				<th></th>
 			</tr>
-		<% end %>
-	</tbody>
-</table>
+		</thead>
+
+		<tbody>
+			<% @users.each do |user| %>
+				<tr>
+					<td><%= user.id %></td>
+					<td><%= user.name %></td>
+					<td><%= link_to "詳細", admin_user_path(user), class: "btn btn-primary" %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<div class="pagination justify-content-center">
+		<%= paginate(@users) %>
+	</div>
+
+</div>
