@@ -3,9 +3,13 @@
 <% end %>
 
 <div>
-  <%= image_tag @user.get_profile_image(200,200), class: "rounded-circle" %>
-    <%= @user.name %>
-    <%= @user.introduction %><br>
+  <div class="d-flex flex-wrap justify-content-center align-items-center mb-5 mt-5">
+    <%= image_tag @user.get_profile_image(200,200), class: "rounded-circle" %>
+      <div class="ml-3">
+        <h4><%= @user.name %></h4>
+        <%= @user.introduction %>
+      </div>
+  </div>
 
   <% if @user == current_user %>
       メールアドレス<%= @user.email %><br>

@@ -7,14 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-#Admin.find_or_create_by!(
-  #admin.email = ENV['ADMIN_EMAIL'], ## 任意のメールアドレス,
-  #admin.encrypted_password = ENV['ADMIN_PASSWORD'] ## 任意のパスワード
-#)
 
-Admin.find_or_create_by(id: 1) do |admin|
- admin.email = ENV['ADMIN_EMAIL']
- admin.encrypted_password = ENV['ADMIN_PASSWORD']
+Admin.find_or_create_by!(email: ENV['ADMIN_EMAIL']) do |admin|
+ admin.password = ENV['ADMIN_PASSWORD']
 end
 
 
@@ -39,29 +34,47 @@ ayaka = User.find_or_create_by!(email: "ayaka@example.com") do |user|
   user.introduction = "はじめたばかりです。"
 end
 
+tag_names = ["初詣", "浴衣", "卒業式", "振袖", "成人式", "前撮り"]
+#タグ　= 0,1,2,3,4,5
+
+tag_names.each do |tag_name|
+  Tag.find_or_create_by(tagname: tag_name)
+end
+
+
 Post.find_or_create_by!(caption: "本日のコーデ。初詣に行ってきました！") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
-  post.tags.tagname = "初詣"
   post.user = mika
+
+  tag = Tag.find_or_create_by(tagname: tag_names[0])
+  post.tags << tag
 end
 
-Post.find_or_create_by! do |post|
+Post.find_or_create_by!(caption: "大学の卒業式でした。振袖は成人式のものに袴はレンタルしました。記念すべき日に晴れて良かったです。") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")
-  post.caption = "大学の卒業式でした。振袖は成人式のものに袴はレンタルしました。記念すべき日に晴れて良かったです。"
-  post.tags = "卒業式"
   post.user = saitou
+
+  tag_names[2..3].each do |tag_name|
+    tag = Tag.find_or_create_by(tagname: tag_name)
+    post.tags << tag
+  end
 end
 
-Post.find_or_create_by! do |post|
+Post.find_or_create_by!(caption: "今年の夏来た浴衣の写真！来年はどんな浴衣を着ようかな〜") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
-  post.caption = "今年の夏来た浴衣の写真！来年はどんな浴衣を着ようかな〜"
-  post.tags = "浴衣"
   post.user = saitou
+
+  tag = Tag.find_or_create_by(tagname: tag_names[1])
+  post.tags << tag
 end
 
-Post.find_or_create_by! do |post|
+Post.find_or_create_by!(caption: "成人式の前撮り！") do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post4.jpg"), filename:"sample-post4.jpg")
-  post.caption = "成人式の前撮り！"
-  post.tags = "成人式"
   post.user = ayaka
+
+  tag_names[3..5].each do |tag_name|
+    tag = Tag.find_or_create_by(tagname: tag_name)
+    post.tags << tag
+  end
 end
+
