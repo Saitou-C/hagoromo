@@ -1,8 +1,12 @@
-<section class="inner">
-	<h2 class="section-ttl">本当に退会しますか？</h2>
-	<h3 class="text-center">退会すると、会員登録情報や<br>これまでの投稿が全て削除され閲覧できなくなります。<br>退会する場合は、「退会する」をクリックしてください。</h3>
-	<div class="flex justify-around mt2">
-	  <%= link_to "マイページに戻る", user_path(current_user.id), class: "btn btn-info" %>
-		<%= link_to "退会する", user_path(current_user.id), class: "destroy-user", method: :delete, "data-confirm" => "OKを押すと退会処理がされます。本当によろしいですか？", class: "btn btn-danger" %>
+<div class="d-flex align-items-center py-4 mt-5">
+	<div class="mx-auto">
+		<div class="text-center">
+			<h2>本当に退会しますか？</h2>
+			<h4>退会すると、会員登録情報や<br>これまでの投稿が全て削除され閲覧できなくなります。<br>退会する場合は、「退会する」をクリックしてください。</h4>
+			<div>
+			  <%= link_to "マイページに戻る", user_path(current_user.id), class: "btn btn-info" %>
+				<%= link_to "退会する", user_path(current_user.id), class: "destroy-user", method: :delete, "data-confirm" => "OKを押すと退会処理がされます。本当によろしいですか？", class: "btn btn-danger" %>
+			</div>
+		</div>
 	</div>
-</section>
+</div>
