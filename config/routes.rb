@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # 顧客用
+  # ユーザー用
   devise_for :users, controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   scope module: :user do
     root to: "posts#index"
     get "confirm_withdraw" => "users#confirm_withdraw"
+    get "/users" => redirect("/users/sign_up") #新規登録失敗後sign_upにリロード
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do #どのユーザーがいいねしたか判別するのにidが必要のためmemberを使う
         get :favorites

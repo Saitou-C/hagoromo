@@ -11,6 +11,9 @@ module Hagoromo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.i18n.default_locale = :ja
+    #日本語対応
+
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       %Q(#{html_tag}).html_safe
     end
