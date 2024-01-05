@@ -1,9 +1,10 @@
+<div><%= render 'layouts/error_messages', resource: @user %></div>
+<div><%#= render "user/shared/error_messages", resource: resource %><!--初期deviseのエラーメッセージ--></div>
 <div class="d-flex align-items-center py-4 mt-5">
   <div class="mx-auto" style="width: 300px;">
     <h2 class="mb-4 text-center">新規会員登録</h2>
 
     <%= form_with model: @user, url: user_registration_path do |f| %>
-      <%= render "user/shared/error_messages", resource: resource %>
 
       <div class="field mb-2">
         <%= f.label :name %><br>

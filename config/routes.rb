@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     root to: "posts#index"
     get "confirm_withdraw" => "users#confirm_withdraw"
     get "/users" => redirect("/users/sign_up") #新規登録失敗後sign_upにリロード
+    get "/posts" => redirect("posts/new") #新規投稿失敗後posts/newにリロード
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do #どのユーザーがいいねしたか判別するのにidが必要のためmemberを使う
         get :favorites
