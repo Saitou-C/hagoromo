@@ -1,3 +1,11 @@
+<% if @user.errors.any? %>
+ <div class="alert alert-danger" role="alert">
+    <% @user.errors.full_messages.each do |message| %>
+      <%= message %>
+    <% end %>
+  </div>
+<% end %>
+
 <h2>プロフィール編集</h2>
 <%= form_with model: @user do |f| %>
     <label for="inputImage">プロフィール画像</label>
