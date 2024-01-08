@@ -1,8 +1,6 @@
 <% if @post.errors.any? %>
   <div class="alert alert-danger" role="alert">
-    <% @post.errors.full_messages.each do |message| %>
-      <%= message %>
-    <% end %>
+    画像が選択されていません
   </div>
 <% end %>
 
