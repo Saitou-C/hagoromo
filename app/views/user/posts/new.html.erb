@@ -4,15 +4,23 @@
   </div>
 <% end %>
 
-<h1>画像投稿フォーム</h1>
-<%= form_with model: @post do |f| %>
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <h4>説明</h4>
-  <%= f.text_area :caption %>
-  <h4>タグ(スペースで区切ると複数タグ登録できます)</h4>
-  <div class="form-group">
-    <%= f.text_field :tagname %>
+<div class="d-flex justify-content-center py-4 mt-3">
+  <div class="mx-auto">
+  <%= form_with model: @post do |f| %>
+
+    <div class="d-flex justify-content-center">
+      <%= f.file_field :image, accept: "image/*" %>
+    </div>
+
+    <div class="field mt-3">
+      <%= f.text_area :caption, class:"form-control", style:"width:600px", placeholder:"キャプション" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.text_field :tagname, class:"form-control", placeholder:"タグ(スペースで区切ると複数タグを登録できます)" %>
+    </div>
+
+    <%= f.submit '投稿する', class:"btn btn-lg btn-block btn-info mt-4" %>
+  <% end %>
   </div>
-  <%= f.submit '投稿' %>
-<% end %>
+</div>
