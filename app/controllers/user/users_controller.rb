@@ -1,5 +1,6 @@
 class User::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show] #indexとshow以外はログインしていないと開けない
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy, :favorites]
 
   def index
     @users = User.page(params[:page]).per(12)
@@ -49,5 +50,12 @@ class User::UsersController < ApplicationController
 
   def set_user
     @user = User.find_by(:id => params[:id])
+  end
+
+  def is_matching_login_user #ログインユーザーかどうか確認
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to root_path
+    end
   end
 end
