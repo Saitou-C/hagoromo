@@ -44,7 +44,6 @@
               <li class="nav-item mr-3"><%= link_to "ログイン", new_user_session_path %></li>
             <% end %>
           </ul>
-
         </div>
 
       </nav>
@@ -56,19 +55,20 @@
         <!--<p class="alert"><%#= alert %></p>-->
         <% flash.each do |name, msg| %>
           <% if flash[:alert] %>
-          <div class="alert alert-danger"<%= name %>>
-            <%= msg %>
-          </div>
+            <div class="alert alert-danger"<%= name %>>
+              <%= msg %>
+            </div>
           <% elsif flash[:success] %>
-          <div class="success alert-success "<%= name %>>
-           <%= msg %>
-          </div>
+            <div class="success alert-success "<%= name %>>
+             <%= msg %>
+            </div>
           <% else notice %>
-          <div class="notice alert-success"<%= name %>>
-            <%= msg %>
-          </div>
+            <div class="notice alert-success"<%= name %>>
+              <%= msg %>
+            </div>
           <% end %>
         <% end %>
+
       <%= yield %>
     </main>
 
