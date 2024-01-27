@@ -16,9 +16,9 @@
     <header class="sticky-top">
       <nav class="navbar" style=" background-color:#e3f2fd;">
 
-        <div class="navbar-brand">
+        <a class="navbar-brand" href="/">
           <h2>Hagoromo</h2>
-        </div>
+        </a>
 
         <div class="container">
           <div class="row form-inline mb-2"><!--検索バー-->
@@ -32,10 +32,22 @@
               <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
 
             <% elsif user_signed_in? %><!--ユーザーログインヘッダー-->
-              <li class="nav-item mr-3"><%= link_to "ホーム", root_path %></li>
-              <li class="nav-item mr-3"><%= link_to "新規記事投稿", new_post_path %></li>
-              <li class="nav-item mr-3"><%= link_to "マイページ", user_path(current_user.id) %></li>
-              <li class="nav-item mr-3"><%= link_to "お気に入り一覧",favorites_user_path(current_user.id) %></li>
+              <li class="nav-item mr-3">
+                <%= link_to root_path do %><!--ホーム-->
+                  <i class="fa-solid fa-house"></i>
+                <% end %>
+              </li>
+              <li class="nav-item mr-3">
+                <%= link_to "新規記事投稿", new_post_path %><!--新規記事投稿-->
+              </li>
+              <li class="nav-item mr-3">
+                <%= link_to "マイページ", user_path(current_user.id) %><!--マイページ-->
+              </li>
+              <li class="nav-item mr-3">
+                <%= link_to favorites_user_path(current_user.id) do %><!--お気に入り-->
+                  <i class="fa-solid fa-heart"></i>
+                <% end %>
+              </li>
               <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 
             <% else %>
