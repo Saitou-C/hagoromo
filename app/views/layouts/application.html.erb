@@ -25,7 +25,6 @@
             <div class="mr-3"><%= render 'user/searches/form' %></div>
           </div>
 
-
           <ul class ="nav">
             <% if admin_signed_in? %><!--管理者ログインヘッダー-->
               <li class="nav-item mr-3"><%= link_to "ユーザー一覧", admin_path %></li>
@@ -34,26 +33,62 @@
             <% elsif user_signed_in? %><!--ユーザーログインヘッダー-->
               <li class="nav-item mr-3">
                 <%= link_to root_path do %><!--ホーム-->
-                  <i class="fa-solid fa-house"></i>
+                  <i class="fa-solid fa-house">
+                    <br>ホーム
+                  </i>
                 <% end %>
               </li>
               <li class="nav-item mr-3">
-                <%= link_to "新規記事投稿", new_post_path %><!--新規記事投稿-->
+                <%= link_to new_post_path do %><!--新規記事投稿-->
+                  <i class="fa-solid fa-pen-to-square">
+                    <br>新規投稿
+                  </i>
+                <% end %>
               </li>
               <li class="nav-item mr-3">
-                <%= link_to "マイページ", user_path(current_user.id) %><!--マイページ-->
+                <%= link_to  user_path(current_user.id) do %><!--マイページ-->
+                  <i class="fa-solid fa-user">
+                    <br>マイページ
+                  </i>
+                <% end %>
               </li>
               <li class="nav-item mr-3">
                 <%= link_to favorites_user_path(current_user.id) do %><!--お気に入り-->
-                  <i class="fa-solid fa-heart"></i>
+                  <i class="fa-solid fa-heart">
+                    <br>お気に入り
+                  </i>
                 <% end %>
               </li>
-              <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete do %><!--ログアウト-->
+                  <i class="fa-solid fa-right-from-bracket">
+                    <br>ログアウト
+                  </i>
+                <% end %>
+              </li>
 
-            <% else %>
-              <li class="nav-item mr-3"><%= link_to "ホーム", root_path %></li>
-              <li class="nav-item mr-3"><%= link_to "新規登録", new_user_registration_path %></li>
-              <li class="nav-item mr-3"><%= link_to "ログイン", new_user_session_path %></li>
+            <% else %> <!--ログイン前-->
+              <li class="nav-item mr-3">
+                <%= link_to root_path do %><!--ホーム-->
+                  <i class="fa-solid fa-house">
+                    <br>ホーム
+                  </i>
+                <% end %>
+              </li>
+              <li class="nav-item mr-3">
+                <%= link_to new_user_registration_path do %><!--新規会員登録-->
+                  <i class="fa-solid fa-user-plus">
+                    <br>新規会員登録
+                  </i>
+                <% end %>
+              </li>
+              <li class="nav-item mr-3">
+                <%= link_to new_user_session_path do %><!--ログイン-->
+                  <i class="fa-solid fa-right-to-bracket">
+                    <br>ログイン
+                  </i>
+                <% end %>
+              </li>
             <% end %>
           </ul>
         </div>
