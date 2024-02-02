@@ -1,6 +1,5 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show] #indexとshow以外はログインしていないと開けない
-  before_action :is_matching_login_user, only: [:destroy]
 
   def new
     @post = Post.new
@@ -22,9 +21,13 @@ class User::PostsController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to root_path
+    def user_id = current_user.id
+      post = Post.find(params[:id])
+      post.destroy
+      redirect_to root_path
+    unless user_id == current_user.id
+      redirect_to root_path
+    end
   end
 
   def index
@@ -43,10 +46,5 @@ class User::PostsController < ApplicationController
       params.require(:post).permit(:image, :caption)
     end
 
-    def is_matching_login_user #ログインユーザーかどうか確認
-      user = User.find(params[:id])
-      unless user.id == current_user.id
-        redirect_to root_path
-      end
-    end
+
 end
