@@ -24,7 +24,7 @@ class User::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path
+    redirect_to root_path
   end
 
   def index
@@ -39,14 +39,14 @@ class User::PostsController < ApplicationController
 
   private
 
-  def post_params
-    params.require(:post).permit(:image, :caption)
-  end
-
-  def is_matching_login_user #ログインユーザーかどうか確認
-    user = User.find(params[:id])
-    unless user.id == current_user.id
-      redirect_to root_path
+    def post_params
+      params.require(:post).permit(:image, :caption)
     end
-  end
+
+    def is_matching_login_user #ログインユーザーかどうか確認
+      user = User.find(params[:id])
+      unless user.id == current_user.id
+        redirect_to root_path
+      end
+    end
 end
