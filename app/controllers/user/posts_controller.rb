@@ -29,6 +29,8 @@ class User::PostsController < ApplicationController
 
   def index
     @posts = Post.page(params[:page]).per(12)
+    @posts = Post.page(params[:page]).per(12).order(created_at: :desc)
+    #order:ソートの順序　created_at:データの作成日　desc:ソートの降順
   end
 
   def show

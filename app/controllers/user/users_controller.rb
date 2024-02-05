@@ -39,7 +39,6 @@ class User::UsersController < ApplicationController
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id) #Favoriteテーブルから＠userのuser_idを取→pluckでpost_idを取ってくる
     @favorite_posts = Post.find(favorites)
     @favorite_posts = Kaminari.paginate_array(@favorite_posts).page(params[:page]).per(12) #findメソッドを使って起きるエラー回避
-
   end
 
   private

@@ -7,6 +7,7 @@
     <% end %>
     <!--ユーザーネーム--><%= @post.user.name %></p>
 
+    <!--お気に入り-->
     <% if user_signed_in? %>
 
         <% if @post.favorited_by?(current_user) %><!--もしログインしているユーザーがいいねしていたら-->
@@ -27,15 +28,20 @@
         ♥<%= @post.favorites.count %>いいね<!--いいね数だけ表示-->
     <% end %>
 
+    <!--コメント数-->
     <i class="fa-regular fa-comment"></i><%= @post.post_comments.count %>
 
     <p><!--説明--><%= @post.caption %></p>
 
-
+    <!--タグ-->
     <% @post.tags.each do |tag| %>
       <li style="list-style: none;"><%= link_to tag.tagname, search_path(content: tag.tagname, model:"tag", method: "perfect") %></li>
     <% end %>
-    <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+
+    <!--登校日-->
+    <p>
+      <i class="fa-regular fa-clock"></i><%= @post.created_at.strftime('%Y/%m/%d') %>
+    </p>
 
     <% if @post.user == current_user %>
       <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "削除します。本当によろしいですか？",class: "btn btn-danger" %>
