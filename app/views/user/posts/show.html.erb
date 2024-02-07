@@ -7,29 +7,35 @@
     <% end %>
     <!--ユーザーネーム--><%= @post.user.name %></p>
 
-    <!--お気に入り-->
-    <% if user_signed_in? %>
+    <div class="d-flex">
+      <div class="mr-3">
+        <!--お気に入り-->
+        <% if user_signed_in? %>
 
-        <% if @post.favorited_by?(current_user) %><!--もしログインしているユーザーがいいねしていたら-->
+            <% if @post.favorited_by?(current_user) %><!--もしログインしているユーザーがいいねしていたら-->
 
-            <%= link_to post_favorite_path(@post), method: :delete do %>
-              ♥<%= @post.favorites.count %>
+                <%= link_to post_favorite_path(@post), method: :delete do %>
+                  ♥<%= @post.favorites.count %>
+                <% end %>
+
+              <% else %>
+
+                <%= link_to post_favorite_path(@post), method: :post do %> <!--もしいいねしていなかったら-->
+                  ♡<%= @post.favorites.count %>
+                <% end %>
+
             <% end %>
 
-          <% else %>
-
-            <%= link_to post_favorite_path(@post), method: :post do %> <!--もしいいねしていなかったら-->
-              ♡<%= @post.favorites.count %>
-            <% end %>
-
+          <% else %><!--もしユーザーがログインしていなかったら-->
+            ♥<%= @post.favorites.count %>いいね<!--いいね数だけ表示-->
         <% end %>
+      </div>
 
-      <% else %><!--もしユーザーがログインしていなかったら-->
-        ♥<%= @post.favorites.count %>いいね<!--いいね数だけ表示-->
-    <% end %>
-
-    <!--コメント数-->
-    <i class="fa-regular fa-comment"></i><%= @post.post_comments.count %>
+      <div>
+        <!--コメント数-->
+        <i class="fa-regular fa-comment"></i><%= @post.post_comments.count %>
+      </div>
+    </div>
 
     <p><!--説明--><%= @post.caption %></p>
 
@@ -48,22 +54,26 @@
     <% end %>
 
     <div>
+      <!--コメント投稿-->
       <% if user_signed_in? %>
         <%= form_with model: [@post, @post_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
+          <%= f.text_area :comment, rows: '5', class:"form-control", placeholder: "コメントを書く" %>
+          <%= f.submit "送信する", class:"btn btn-info" %>
         <% end %>
       <% end %>
     </div>
-    <!--コメント一覧-->
-    <% @post.post_comments.each do |post_comment| %>
-      <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle" %>
-      <%= post_comment.user.name %>
-      <%= post_comment.comment %>
-      <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-      <% if post_comment.user == current_user %>
-        <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-danger" %>
+
+    <div class="mt-3">
+      <!--コメント一覧-->
+      <% @post.post_comments.each do |post_comment| %>
+        <%= image_tag post_comment.user.get_profile_image(50,50), class: "rounded-circle" %>
+        <%= post_comment.user.name %>
+        <%= post_comment.comment %>
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        <% if post_comment.user == current_user %>
+          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-danger" %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
