@@ -8,7 +8,8 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).per(12)
+    @posts = @user.posts.page(params[:page]).per(12).order(created_at: :desc)
+    #order:ソートの順序　created_at:データの作成日　desc:ソートの降順
   end
 
   def edit
