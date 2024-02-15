@@ -15,9 +15,11 @@
             </div>
 
             <div class="col-7">
-              <p><%= post.user.name %><br>
-              <i class="fa-solid fa-heart"></i><%= post.favorites.count %>
-              <i class="fa-regular fa-comment"></i><%= post.post_comments.count %></p>
+              <div><%= post.user.name %></div>
+              <div>
+                <i class="fa-solid fa-heart"></i><%= post.favorites.count %>
+                <i class="fa-regular fa-comment ml-2"></i><%= post.post_comments.count %>
+              </div>
               <!--
               <i class="fa-regular fa-temperature-quarter"></i>
               気温-->
