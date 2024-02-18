@@ -3,14 +3,16 @@
 
   <% if users.any? %>
   <div class="card mx-auto mt-4 w-50 center-block">
-    <div class="card-body">
     <% users.each do |user| %>
-      <%= link_to user, class: "user_#{user.id}" do %>
-        <%= image_tag user.get_profile_image(80,80), class: "rounded-circle" %>
-      <% end %>
+    <div class="card-body bg-info">
+      <span class="mr-2">
+        <%= link_to user, class: "user_#{user.id}" do %>
+          <%= image_tag user.get_profile_image(80,80), class: "rounded-circle" %>
+        <% end %>
+      </span>
 
-      <%= user.name %>
-      <%= user.introduction %>
+      <span class="font-weight-bold"><%= user.name %></span>
+      <span class="col align-self-end"><%= user.introduction %></span>
 
     <% end %>
     </div>
